@@ -10,7 +10,7 @@ function App() {
     <>
       <Wrapper>
         <Header desktop={desktop} planets={data} />
-        <Outlet />
+        <Outlet context={{ desktop, data }} />
       </Wrapper>
     </>
   );

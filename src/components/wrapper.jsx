@@ -1,5 +1,5 @@
 const Wrapper = ({ children }) => {
-  return <div>{children}</div>;
+  return <div className="h-full min-h-screen">{children}</div>;
 };
 
 export default Wrapper;

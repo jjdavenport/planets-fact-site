@@ -1,9 +1,9 @@
-import Image from "./image";
-
-const Content = () => {
+const Content = ({ data }) => {
   return (
     <>
-      <Image />
+      <h1>{data.name}</h1>
+      <p>{data.structure.content}</p>
+      <a href={data.structure.source}>Source:</a>
     </>
   );
 };

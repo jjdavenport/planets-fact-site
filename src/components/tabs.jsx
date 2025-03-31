@@ -1,15 +1,15 @@
 const Tabs = () => {
   return (
     <>
-      <ul>
+      <ul className="flex justify-between p-4">
         <li>
-          <button></button>
+          <button>Overview</button>
         </li>
         <li>
-          <button></button>
+          <button>Structure</button>
         </li>
         <li>
-          <button></button>
+          <button>Surface</button>
         </li>
       </ul>
     </>

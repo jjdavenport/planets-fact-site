@@ -1,7 +1,7 @@
-const Image = ({ img }) => {
+const Image = ({ data }) => {
   return (
     <>
-      <img src={img} />
+      <img src={`.${data}`} />
     </>
   );
 };
