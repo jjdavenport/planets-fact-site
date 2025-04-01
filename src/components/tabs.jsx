@@ -1,15 +1,15 @@
-const Tabs = () => {
+const Tabs = ({ tablet }) => {
   return (
     <>
-      <ul className="flex justify-between p-4">
+      <ul className="flex w-full justify-between md:w-1/2 md:flex-col">
         <li>
-          <button>Overview</button>
+          <button>{tablet && "01"} Overview</button>
         </li>
         <li>
-          <button>Structure</button>
+          <button>{tablet && "02"} Structure</button>
         </li>
         <li>
-          <button>Surface</button>
+          <button>{tablet && "03"} Surface</button>
         </li>
       </ul>
     </>

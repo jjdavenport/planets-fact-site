@@ -5,12 +5,12 @@ import data from "./assets/data.json";
 import Wrapper from "./components/wrapper";
 
 function App() {
-  const desktop = useMediaQuery({ minWidth: 768 });
+  const tablet = useMediaQuery({ minWidth: 768 });
   return (
     <>
       <Wrapper>
-        <Header desktop={desktop} planets={data} />
-        <Outlet context={{ desktop, data }} />
+        <Header tablet={tablet} planets={data} />
+        <Outlet context={{ tablet, data }} />
       </Wrapper>
     </>
   );
