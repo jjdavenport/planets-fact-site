@@ -17,10 +17,10 @@ const Page = () => {
   if (tablet) {
     return (
       <>
-        <main className="flex flex-1 flex-col items-center gap-4 p-4">
-          <section className="flex items-center gap-4 md:flex-col lg:flex-row lg:items-start">
+        <main className="flex flex-1 flex-col items-center gap-8 px-8 py-16">
+          <section className="flex items-center gap-16 md:flex-col lg:flex-row lg:items-start">
             <Image data={pageData.images.planet} />
-            <div className="flex flex-1 gap-4 lg:flex-col lg:items-center">
+            <div className="flex flex-1 justify-between gap-4 lg:flex-col lg:items-center">
               <Content data={pageData} />
               <Tabs tab={tab} setTab={setTab} tablet={tablet} />
             </div>

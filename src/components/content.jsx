@@ -1,7 +1,7 @@
 const Content = ({ data }) => {
   return (
     <>
-      <article className="flex flex-col items-center gap-6 text-center md:w-1/2">
+      <article className="flex flex-col items-center gap-6 text-center md:w-1/2 md:items-start md:text-left">
         <h1 className="font-antonio text-5xl uppercase md:text-6xl">
           {data.name}
         </h1>
