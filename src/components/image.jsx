@@ -1,7 +1,7 @@
 const Image = ({ data }) => {
   return (
     <>
-      <img className="object-contain md:w-1/2" src={`.${data}`} />
+      <img className="w-1/2 object-contain" src={`.${data}`} />
     </>
   );
 };

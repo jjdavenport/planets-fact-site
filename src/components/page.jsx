@@ -8,6 +8,7 @@ import List from "./list";
 const Page = () => {
   const { tablet, data } = useOutletContext();
   const [pageData, setPageData] = useState(data[2]);
+  const [tab, setTab] = useState("overview");
 
   useEffect(() => {
     console.log(pageData);
@@ -19,10 +20,10 @@ const Page = () => {
         <main className="flex flex-1 flex-col items-center gap-4 p-4">
           <section className="flex items-center gap-4 md:flex-col lg:flex-row lg:items-start">
             <Image data={pageData.images.planet} />
-            <section className="flex flex-1 gap-4 lg:flex-col lg:items-center">
+            <div className="flex flex-1 gap-4 lg:flex-col lg:items-center">
               <Content data={pageData} />
-              <Tabs tablet={tablet} />
-            </section>
+              <Tabs tab={tab} setTab={setTab} tablet={tablet} />
+            </div>
           </section>
           <List data={pageData} />
         </main>
@@ -32,11 +33,13 @@ const Page = () => {
 
   return (
     <>
-      <main className="flex flex-1 flex-col items-center gap-4 p-4">
-        <Tabs />
+      <main className="flex flex-1 flex-col items-center gap-16 pb-16">
+        <Tabs tab={tab} setTab={setTab} />
         <Image data={pageData.images.planet} />
-        <Content data={pageData} />
-        <List data={pageData} />
+        <section className="flex flex-col gap-10 px-4">
+          <Content data={pageData} />
+          <List data={pageData} />
+        </section>
       </main>
     </>
   );
