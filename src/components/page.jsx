@@ -8,21 +8,53 @@ import List from "./list";
 const Page = () => {
   const { tablet, data } = useOutletContext();
   const [pageData, setPageData] = useState(data[2]);
-  const [tab, setTab] = useState("overview");
+  const [page, setPage] = useState({
+    tab: "overview",
+    image: pageData.images.planet,
+    name: pageData.name,
+    content: pageData.overview.content,
+    source: pageData.overview.source,
+  });
 
   useEffect(() => {
     console.log(pageData);
   }, [pageData]);
+
+  const innerPage = (button) => {
+    button === "overview"
+      ? setPage({
+          tab: "overview",
+          image: pageData.images.planet,
+          name: pageData.name,
+          content: pageData.overview.content,
+          source: pageData.overview.source,
+        })
+      : button === "structure"
+        ? setPage({
+            tab: "structure",
+            image: pageData.images.internal,
+            name: pageData.name,
+            content: pageData.structure.content,
+            source: pageData.structure.source,
+          })
+        : setPage({
+            tab: "surface",
+            image: pageData.images.geology,
+            name: pageData.name,
+            content: pageData.geology.content,
+            source: pageData.geology.source,
+          });
+  };
 
   if (tablet) {
     return (
       <>
         <main className="flex flex-1 flex-col items-center gap-8 px-8 py-16">
           <section className="flex items-center gap-16 md:flex-col lg:flex-row lg:items-start">
-            <Image data={pageData.images.planet} />
+            <Image data={page.image} />
             <div className="flex flex-1 justify-between gap-4 lg:flex-col lg:items-center">
-              <Content data={pageData} />
-              <Tabs tab={tab} setTab={setTab} tablet={tablet} />
+              <Content data={page} />
+              <Tabs tab={page.tab} setTab={innerPage} tablet={tablet} />
             </div>
           </section>
           <List data={pageData} />
@@ -34,10 +66,10 @@ const Page = () => {
   return (
     <>
       <main className="flex flex-1 flex-col items-center gap-16 pb-16">
-        <Tabs tab={tab} setTab={setTab} />
+        <Tabs tab={page.tab} setTab={innerPage} />
         <Image data={pageData.images.planet} />
         <section className="flex flex-col gap-10 px-4">
-          <Content data={pageData} />
+          <Content data={page} />
           <List data={pageData} />
         </section>
       </main>

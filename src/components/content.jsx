@@ -5,14 +5,12 @@ const Content = ({ data }) => {
         <h1 className="font-antonio text-5xl uppercase md:text-6xl">
           {data.name}
         </h1>
-        <p className="font-spartan text-sm tracking-wide">
-          {data.overview.content}
-        </p>
+        <p className="font-spartan text-sm tracking-wide">{data.content}</p>
         <div className="flex gap-1 font-spartan text-sm text-lightGrey">
           <span>Source:</span>
           <a
             className="flex items-center gap-1 font-semibold tracking-wide underline"
-            href={data.overview.source}
+            href={data.source}
           >
             Wikipedia
             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12">

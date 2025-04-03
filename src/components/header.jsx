@@ -1,7 +1,11 @@
 import { Link } from "react-router";
+import { useState } from "react";
 import menuIcon from "../assets/icon-hamburger.svg";
+import MobileMenu from "./mobile-menu";
 
 const Header = ({ planets, tablet }) => {
+  const [menu, setMenu] = useState(false);
+
   if (tablet) {
     return (
       <>
@@ -28,10 +32,11 @@ const Header = ({ planets, tablet }) => {
     <>
       <header className="flex w-full justify-between border-b border-darkGrey p-4 uppercase">
         <h1 className="font-antonio text-3xl">The Planets</h1>
-        <button>
+        <button onClick={() => setMenu(!menu)}>
           <img src={menuIcon} />
         </button>
       </header>
+      {menu && <MobileMenu planets={planets} />}
     </>
   );
 };
