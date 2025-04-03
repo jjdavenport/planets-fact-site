@@ -14,7 +14,7 @@ const Header = ({ planets, tablet }) => {
                   className="font-spartan text-sm font-medium tracking-wide"
                   key={index}
                 >
-                  <Link to={`/planet/${planet.name}`}>{planet.name}</Link>
+                  <Link to={`planet/${planet.name}`}>{planet.name}</Link>
                 </li>
               ))}
             </ul>

@@ -7,15 +7,15 @@ import Page from "./components/page.jsx";
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Navigate to="/planet/earth" replace />,
-  },
-  {
-    path: "/planet/:id",
+    path: "/planets-fact-site/",
     element: <App />,
     children: [
       {
-        path: "",
+        index: true,
+        element: <Navigate to="planet/earth" replace />,
+      },
+      {
+        path: "planet/:id",
         element: <Page />,
       },
     ],
