@@ -1,10 +1,21 @@
-import { Link } from "react-router";
-import { useState } from "react";
+import { Link, useLocation } from "react-router";
+import { useEffect, useState } from "react";
 import menuIcon from "../assets/icon-hamburger.svg";
 import MobileMenu from "./mobile-menu";
 
 const Header = ({ planets, tablet }) => {
+  const location = useLocation();
   const [menu, setMenu] = useState(false);
+
+  useEffect(() => {
+    setMenu(false);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    menu
+      ? document.documentElement.classList.add("overflow-hidden")
+      : document.documentElement.classList.remove("overflow-hidden");
+  }, [menu]);
 
   if (tablet) {
     return (
@@ -18,7 +29,9 @@ const Header = ({ planets, tablet }) => {
                   className="font-spartan text-sm font-medium tracking-wide"
                   key={index}
                 >
-                  <Link to={`planet/${planet.name}`}>{planet.name}</Link>
+                  <Link to={`planet/${planet.name.toLowerCase()}`}>
+                    {planet.name}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -36,7 +49,13 @@ const Header = ({ planets, tablet }) => {
           <img src={menuIcon} />
         </button>
       </header>
-      {menu && <MobileMenu planets={planets} />}
+      {menu && (
+        <MobileMenu
+          location={location}
+          onClick={() => setMenu(false)}
+          planets={planets}
+        />
+      )}
     </>
   );
 };

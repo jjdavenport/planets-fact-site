@@ -1,4 +1,4 @@
-import { useOutletContext } from "react-router";
+import { useOutletContext, useParams } from "react-router";
 import { useEffect, useState } from "react";
 import Image from "./image";
 import Tabs from "./tabs";
@@ -7,43 +7,62 @@ import List from "./list";
 
 const Page = () => {
   const { tablet, data } = useOutletContext();
-  const [pageData, setPageData] = useState(data[2]);
+  const { id } = useParams();
+
+  const pathData = data?.find(
+    (planet) => planet.name.toLowerCase() === id?.toLowerCase(),
+  );
+
+  const [pageData, setPageData] = useState(pathData);
+
+  useEffect(() => {
+    setPageData(pathData);
+  }, [pathData]);
+
   const [page, setPage] = useState({
     tab: "overview",
-    image: pageData.images.planet,
-    name: pageData.name,
-    content: pageData.overview.content,
-    source: pageData.overview.source,
+    image: "",
+    name: "",
+    content: "",
+    source: "",
   });
 
   useEffect(() => {
-    console.log(pageData);
+    setPage({
+      tab: "overview",
+      image: pageData.images.planet,
+      name: pageData.name,
+      content: pageData.overview.content,
+      source: pageData.overview.source,
+    });
   }, [pageData]);
 
   const innerPage = (button) => {
-    button === "overview"
-      ? setPage({
-          tab: "overview",
-          image: pageData.images.planet,
-          name: pageData.name,
-          content: pageData.overview.content,
-          source: pageData.overview.source,
-        })
-      : button === "structure"
-        ? setPage({
-            tab: "structure",
-            image: pageData.images.internal,
-            name: pageData.name,
-            content: pageData.structure.content,
-            source: pageData.structure.source,
-          })
-        : setPage({
-            tab: "surface",
-            image: pageData.images.geology,
-            name: pageData.name,
-            content: pageData.geology.content,
-            source: pageData.geology.source,
-          });
+    if (button === "overview") {
+      setPage({
+        tab: "overview",
+        image: pageData.images.planet,
+        name: pageData.name,
+        content: pageData.overview.content,
+        source: pageData.overview.source,
+      });
+    } else if (button === "structure") {
+      setPage({
+        tab: "structure",
+        image: pageData.images.internal,
+        name: pageData.name,
+        content: pageData.structure.content,
+        source: pageData.structure.source,
+      });
+    } else {
+      setPage({
+        tab: "surface",
+        image: pageData.images.geology,
+        name: pageData.name,
+        content: pageData.geology.content,
+        source: pageData.geology.source,
+      });
+    }
   };
 
   if (tablet) {
@@ -57,7 +76,7 @@ const Page = () => {
               <Tabs tab={page.tab} setTab={innerPage} tablet={tablet} />
             </div>
           </section>
-          <List data={pageData} />
+          {pageData && <List data={pageData} />}
         </main>
       </>
     );
@@ -67,10 +86,10 @@ const Page = () => {
     <>
       <main className="flex flex-1 flex-col items-center gap-16 pb-16">
         <Tabs tab={page.tab} setTab={innerPage} />
-        <Image data={pageData.images.planet} />
+        <Image data={page?.image} />
         <section className="flex flex-col gap-10 px-4">
           <Content data={page} />
-          <List data={pageData} />
+          {pageData && <List data={pageData} />}
         </section>
       </main>
     </>

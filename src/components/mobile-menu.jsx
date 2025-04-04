@@ -22,7 +22,7 @@ const MobileMenu = ({ planets }) => {
               <li key={index}>
                 <Link
                   className="flex items-center justify-between py-4 font-semibold uppercase"
-                  to={`planet/${planet.name}`}
+                  to={`planet/${planet.name.toLowerCase()}`}
                 >
                   <div className="flex gap-4">
                     <div
